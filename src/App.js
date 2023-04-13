@@ -7,15 +7,15 @@ import List from "./components/List/List";
 import { Transition } from "react-transition-group";
 
 function App() {
-	const [showModal, setShowModal] = useState(false);
+	const [modalIsOpen, setModalIsOpen] = useState(false);
 	const [showBlock, setShowBlock] = useState(false);
 
 	const showModalHandler = () => {
-		setShowModal(true);
+		setModalIsOpen(true);
 	};
 
 	const closeModalHandler = () => {
-		setShowModal(false);
+		setModalIsOpen(false);
 	};
 
 	return (
@@ -38,12 +38,11 @@ function App() {
 						}}
 					></div>
 				)}
-				{/* {showBlock ? ( */}
-
-				{/* ) : null} */}
 			</Transition>
-			<Modal show={showModal} closed={closeModalHandler} />
-			<Backdrop show={showModal} />
+			<Transition in={modalIsOpen} timeout={300} mountOnEnter unmountOnExit>
+				{(state) => <Modal show={state} closed={closeModalHandler} />}
+			</Transition>
+			{modalIsOpen ? <Backdrop show /> : null}
 			<button className="Button" onClick={showModalHandler}>
 				Open Modal
 			</button>
