@@ -39,9 +39,7 @@ function App() {
 					></div>
 				)}
 			</Transition>
-			<Transition in={modalIsOpen} timeout={300} mountOnEnter unmountOnExit>
-				{(state) => <Modal show={state} closed={closeModalHandler} />}
-			</Transition>
+			<Modal show={modalIsOpen} closed={closeModalHandler} />
 			{modalIsOpen ? <Backdrop show /> : null}
 			<button className="Button" onClick={showModalHandler}>
 				Open Modal
